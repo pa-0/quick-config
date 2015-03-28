@@ -1,1 +1,1 @@
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/CSI-Windowscom/Bootstraps/master/PowerShell5.ps1'))"
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/CSI-Windowscom/Bootstraps/master/QuickConfigPowerShell5.ps1'))"
