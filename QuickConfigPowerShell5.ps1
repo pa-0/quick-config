@@ -3,7 +3,7 @@
 
 "Getting Started..." | out-default
 
-"ATTENTION: Setting Machine Execution Policy to Remote-Signed" | out-default
+"`r`n`r`nATTENTION: Setting Machine Execution Policy to Remote-Signed`r`n`r`n" | out-default
 Try {set-executionpolicy RemoteSigned -Force -EA Silently Continue}
 Catch{}
 
@@ -19,3 +19,5 @@ Choco Install -y PowerShell -Pre
 
 "Installing PowerShell DSC Resource Kit..." | out-default
 Choco Install -y DSCResourcekit
+
+"`r`n`r`nATTENTION: Your Machine Execution Policy was Set to RemoteSigned`r`n`r`n" | out-default
