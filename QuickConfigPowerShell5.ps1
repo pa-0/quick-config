@@ -21,3 +21,6 @@ Choco Install -y PowerShell -Pre
 Choco Install -y DSCResourcekit
 
 "`r`n`r`nATTENTION: Your Machine Execution Policy was Set to RemoteSigned`r`n`r`n" | out-default
+
+"Please resetart for WMF / PowerShell 5 to become active." | out-default
+
