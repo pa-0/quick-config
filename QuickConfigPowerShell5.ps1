@@ -11,7 +11,7 @@ If (!(Test-Path env:ChocolateyInstall))
   }
 
 "Available versions of Dot Net" | out-default
-If ((get-itemproperty "hklm:software\microsoft\net framework setup\ndp\v4\full" -ea silentlycontinue | Select -Expand Release) -ge 378675)
+If ((get-itemproperty "hklm:software\microsoft\net framework setup\ndp\v4\full" -ea silentlycontinue | Select -Expand Release -ea silentlycontinue) -ge 378675)
   {
   "The minimum Dot Net Version (4.5.1), is installed." | out-default
   }
