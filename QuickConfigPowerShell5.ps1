@@ -30,5 +30,5 @@ Choco Install -y DSCResourcekit
 "`r`n`r`nATTENTION: If this is a test or lab machine, do not forget to set your PowerShell Execution policy to RemoteSigned to allow scripts to run using `"Set-ExecutionPolicy RemoteSigned -Force`"`r`n`r`n" | out-default
 
 
-"Please resetart for WMF / PowerShell 5 to become active. (In PowerShell: `"Restart-Computer`")" | out-default
+"Please restart for WMF / PowerShell 5 to become active. (In PowerShell: `"Restart-Computer`")" | out-default
 
