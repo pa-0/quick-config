@@ -10,6 +10,17 @@ If (!(Test-Path env:ChocolateyInstall))
   $env:path = "$($env:ALLUSERSPROFILE)\chocolatey\bin;$($env:Path)"
   }
 
+"Available versions of Dot Net" | out-default
+If ((get-itemproperty "hklm:software\microsoft\net framework setup\ndp\v4\full" -ea silentlycontinue | Select -Expand Release) -ge 378675)
+  {
+  "The minimum Dot Net Version (4.5.1), is installed." | out-default
+  }
+Else
+  {
+  "The minimum Dot Net Version (4.5.1), is not installed, installing 4.5.1..." | out-default
+  Choco Install -y dotnet4.5.1    
+  }
+
 "Installing PowerShell 5 Chocolatey Package..." | out-default
 Choco Install -y PowerShell -Pre
 
