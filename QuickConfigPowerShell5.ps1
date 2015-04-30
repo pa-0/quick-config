@@ -3,6 +3,8 @@
 
 "Getting Started..." | out-default
 
+Write-Warning "Re-run this script as many times as necessary.  On Windows 7 SP1 and Server 2008 R2 SP1, this will probably be three times."
+
 $os = (Get-WmiObject "Win32_OperatingSystem")
 
 If (!(Test-Path env:ChocolateyInstall))
@@ -40,9 +42,13 @@ If (([version]$os.version -ge [version]"6.1.7601") -AND ([version]$os.version -l
     }
   }
 
-"Installing PowerShell 5 Chocolatey Package..." | out-default
-#Choco Install -y PowerShell -Pre
-cinst -y powershell -version "5.0.10105-April2015Preview" -pre -source "C:\Users\public"
+  If ($PSVersionTable.PSVersion -lt [Version]'5.0.10105')
+  {
+  "Installing PowerShell 5 Chocolatey Package..." | out-default
+  #Choco Install -y PowerShell -Pre
+  cinst -y powershell -version "5.0.10105-April2015Preview" -pre -source "C:\Users\public"
+  restart-computer
+  }
 
   If ([Version]$PSVersionTable.PSVersion -ge [Version]'5.0')
     {
