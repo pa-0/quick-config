@@ -44,8 +44,20 @@ If (([version]$os.version -ge [version]"6.1.7601") -AND ([version]$os.version -l
 #Choco Install -y PowerShell -Pre
 cinst -y powershell -version "5.0.10105-April2015Preview" -pre -source "C:\Users\public"
 
-"Installing PowerShell DSC Resource Kit..." | out-default
-Choco Install -y DSCResourcekit
+  If ([Version]$PSVersionTable.PSVersion -ge [Version]'5.0')
+    {
+	"You are running PowerShell 5, Installing all the latest DSCResourcekit modules from PowerShellGallery.com" | Out-Default
+	"Automatically installing and activating the Nuget provider." | Out-Default
+    Get-PackageProvider -Name NuGet -ForceBootstrap | out-null
+	$existingrescount = (Get-DSCResource).count
+    $reskitmodulecount = (find-module | where tags -contains "DSCResourceKit").count 
+    "Installing $reskitmodulecount modules, please be patient as this can take a while..."
+	#Get all the latest DSCResourcekit Modules
+    find-module | where tags -contains "DSCResourceKit" | install-module -force
+	$newDSCcount = (Get-DSCResource).count - $existingrescount
+	"Installed $reskitmodulecount modules, containing $newDSCcount DSC Resources, use `"Get-DSCResource`" to see what was installed." | Out-Default
+	}
+
 
 "`r`n`r`nATTENTION: If this is a test or lab machine, do not forget to set your PowerShell Execution policy to RemoteSigned to allow scripts to run using `"Set-ExecutionPolicy RemoteSigned -Force`"`r`n`r`n" | out-default
 
