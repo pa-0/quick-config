@@ -1,9 +1,22 @@
 
-"`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n" | out-default
+Function Console-Prompt {
+  Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
+$choicedesc = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription] 
+$choiceList | foreach { 
+$comps = $_ -split '=' 
+$choicedesc.Add((New-Object "System.Management.Automation.Host.ChoiceDescription" -ArgumentList $comps[0],$comps[1]))} 
+#$choicedesc.Add((New-Object "System.Management.Automation.Host.ChoiceDescription" -ArgumentList $_))} 
+$Host.ui.PromptForChoice($caption, $message, $choicedesc, $default) 
+}
+
+Write-output "`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n"
+Write-output "Gets Powershell 5 onto your system and optionally installs all the latest DSC Resource Kit Modules"
 
 "Getting Started..." | out-default
 
 Write-Warning "Re-run this script as many times as necessary.  On Windows 7 SP1 and Server 2008 R2 SP1, this will probably be three times."
+
+Set-ExecutionPolicy RemoteSigned
 
 $os = (Get-WmiObject "Win32_OperatingSystem")
 
@@ -52,6 +65,11 @@ If (([version]$os.version -ge [version]"6.1.7601") -AND ([version]$os.version -l
 
   If ([Version]$PSVersionTable.PSVersion -ge [Version]'5.0')
     {
+
+  Switch (Console-Prompt -Caption "Reboot?" -Message "Do you wish to Install the DSC Resource Kit?" -choice "&Yes=Yes", "&No=No" -default 0)
+    {
+	0 {
+
 	"You are running PowerShell 5, Installing all the latest DSCResourcekit modules from PowerShellGallery.com" | Out-Default
 	"Automatically installing and activating the Nuget provider." | Out-Default
     Get-PackageProvider -Name NuGet -ForceBootstrap | out-null
@@ -63,9 +81,5 @@ If (([version]$os.version -ge [version]"6.1.7601") -AND ([version]$os.version -l
 	$newDSCcount = (Get-DSCResource).count - $existingrescount
 	"Installed $reskitmodulecount modules, containing $newDSCcount DSC Resources, use `"Get-DSCResource`" to see what was installed." | Out-Default
 	}
-
-
-"`r`n`r`nATTENTION: If this is a test or lab machine, do not forget to set your PowerShell Execution policy to RemoteSigned to allow scripts to run using `"Set-ExecutionPolicy RemoteSigned -Force`"`r`n`r`n" | out-default
-
-"Please restart for WMF / PowerShell 5 to become active. (In PowerShell: `"Restart-Computer`")" | out-default
-
+       } 
+    }
