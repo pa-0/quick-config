@@ -58,8 +58,7 @@ If (([version]$os.version -ge [version]"6.1.7601") -AND ([version]$os.version -l
   If ($PSVersionTable.PSVersion -lt [Version]'5.0.10105')
   {
   Write-Output "Installing PowerShell 5 Chocolatey Package..."
-  #Choco Install -y PowerShell -Pre
-  cinst -y powershell -version "5.0.10105-April2015Preview" -pre -source "C:\Users\public"
+  Choco Install -y PowerShell -version 5.0.10105-April2015Preview -pre
   restart-computer
   }
   Else
