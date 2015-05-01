@@ -57,16 +57,20 @@ If (([version]$os.version -ge [version]"6.1.7601") -AND ([version]$os.version -l
 
   If ($PSVersionTable.PSVersion -lt [Version]'5.0.10105')
   {
-  "Installing PowerShell 5 Chocolatey Package..." | out-default
+  Write-Output "Installing PowerShell 5 Chocolatey Package..."
   #Choco Install -y PowerShell -Pre
   cinst -y powershell -version "5.0.10105-April2015Preview" -pre -source "C:\Users\public"
   restart-computer
+  }
+  Else
+  {
+  Write-Output "PowerShell 5 is installed."
   }
 
   If ([Version]$PSVersionTable.PSVersion -ge [Version]'5.0')
     {
 
-  Switch (Console-Prompt -Caption "Reboot?" -Message "Do you wish to Install the DSC Resource Kit?" -choice "&Yes=Yes", "&No=No" -default 0)
+  Switch (Console-Prompt -Caption "Install all the latest DSC Resources from PowerShellGallery.com?" -Message "Do you wish to Install the DSC Resource Kit?" -choice "&Yes=Yes", "&No=No" -default 0)
     {
 	0 {
 
