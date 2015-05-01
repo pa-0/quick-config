@@ -59,7 +59,7 @@ If (([version]$os.version -ge [version]"6.1.7601") -AND ([version]$os.version -l
   {
   Write-Output "Installing PowerShell 5 Chocolatey Package..."
   Choco Install -y PowerShell -version 5.0.10105-April2015Preview -pre
-  restart-computer
+  #restart-computer
   }
   Else
   {
