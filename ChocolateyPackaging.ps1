@@ -28,6 +28,20 @@ If (!(Test-Path env:ChocolateyInstall))
 Write-Output "Installing Packages"
 choco install warmup
 choco install git
+$gitpath = 'C:\Program Files (x86)\git\cmd'
+$CurrentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
+$CurrentProcessPath = [Environment]::GetEnvironmentVariable("Path", "Process")
+if (!($CurrentMachinePath -ilike "*\git\cmd*"))
+  {
+  [Environment]::SetEnvironmentVariable("Path", $CurrentMachinePath + ";$gitpath", "Machine")
+  }
+
+if (!($CurrentProcessPath -ilike "*\git\cmd*"))
+  {
+  [Environment]::SetEnvironmentVariable("Path", $CurrentProcessPath + ";$gitpath", "Process")
+  }
+git config --global credential.helper wincred
+
 choco install nuget.commandline
 $env:path = $env:path + ";C:\Program Files (x86)\git\cmd"
 cd $env:chocolateyinstall
