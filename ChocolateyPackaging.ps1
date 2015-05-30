@@ -26,8 +26,9 @@ If (!(Test-Path env:ChocolateyInstall))
   }
 
 Write-Output "Installing Packages"
-choco install warmup
-choco install git
+cinst -y notepadplusplus
+cinst -y warmup
+cinst -y git
 $gitpath = 'C:\Program Files (x86)\git\cmd'
 $CurrentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
 $CurrentProcessPath = [Environment]::GetEnvironmentVariable("Path", "Process")
