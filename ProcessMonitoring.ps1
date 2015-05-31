@@ -27,7 +27,7 @@ If (!(Test-Path env:ChocolateyInstall))
 
 Write-Output "Installing Packages"
  cinst -y windbg
- cinst -y procmon
+ cinst -y procmon -pre
  cinst -y procexp
  cinst -y rohitabapimonitor
  cinst -y nektraspystudio
