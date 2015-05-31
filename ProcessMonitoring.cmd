@@ -1,0 +1,1 @@
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/CSI-Windowscom/Bootstraps/master/ProcessMonitoring.ps1'));[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$false}"
