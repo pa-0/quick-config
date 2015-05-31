@@ -27,8 +27,8 @@ If (!(Test-Path env:ChocolateyInstall))
 
 Write-Output "Installing Packages"
  cinst -y windbg -version 8.59.20141003
- cinst -y procmon -pre
- cinst -y procexp
+ cinst -y procmon -version 3.2
+ cinst -y procexp -version 16.05
  cinst -y rohitabapimonitor -version 2.13
  cinst -y nektraspystudio -version 2.9.1.0
 
