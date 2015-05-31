@@ -26,11 +26,11 @@ If (!(Test-Path env:ChocolateyInstall))
   }
 
 Write-Output "Installing Packages"
- cinst -y windbg -version 8.59.20141003
- cinst -y procmon -version 3.2
- cinst -y procexp -version 16.05
- cinst -y rohitabapimonitor -version 2.13
- cinst -y nektraspystudio -version 2.9.1.0
+ cinst -y windbg -version 8.59.20141003 --force
+ cinst -y procmon -version 3.2 --force
+ cinst -y procexp -version 16.05 --force
+ cinst -y rohitabapimonitor -version 2.13 --force
+ cinst -y nektraspystudio -version 2.9.1.0 --force
 
 Write-output "`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n"
 Write-output "Your Machine is Ready to Analyze Processes"
