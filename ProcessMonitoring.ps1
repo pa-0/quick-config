@@ -29,8 +29,8 @@ Write-Output "Installing Packages"
  cinst -y windbg
  cinst -y procmon -pre
  cinst -y procexp
- cinst -y rohitabapimonitor
- cinst -y nektraspystudio
+ cinst -y rohitabapimonitor -version 2.13
+ cinst -y nektraspystudio -version 2.9.1.0
 
 Write-output "`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n"
 Write-output "Your Machine is Ready to Analyze Processes"
