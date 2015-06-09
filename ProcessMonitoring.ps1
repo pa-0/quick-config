@@ -1,3 +1,25 @@
+$Description = "ProcessMonitoring.ps1 - install process monitoring tools (for use on lab machines)"
+$Changes = @"
+  [1] Installs chocolatey package manager (which installs .NET 4 if needed)
+  [2] Sets PowerShell Execution Policy to "RemoteSigned"
+  [3] Installs WinDbg
+  [4] Installs Procmon
+  [5] Installs Procexp (and shortcut w/ elevation)
+  [6] Installs Nektra Spy Studio (and shortcut w/ elevation)
+"@
+
+clear-host
+Write-output "****************************************************"
+Write-output "Quick Config by Darwin (CSI-Windows.com)..."
+Write-output $Description
+Write-output "Changes to be made:"
+Write-output $Changes
+Write-output "****************************************************"
+
+Function Test-ProcHasAdmin {Return [bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544")}
+If (!(Test-ProcHasAdmin))
+  {Throw "You must be running as an administrator, please restart as administrator"}
+
 Function Console-Prompt {
   Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
 $choicedesc = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription] 
@@ -8,12 +30,161 @@ $choicedesc.Add((New-Object "System.Management.Automation.Host.ChoiceDescription
 $Host.ui.PromptForChoice($caption, $message, $choicedesc, $default) 
 }
 
-Write-output "`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n"
-Write-output "Gets Your Machine Ready to Analyze Processes"
+Function Add-Shortcut { 
+ 
+[CmdletBinding()] 
+param( 
+    [Parameter(Mandatory=$True,  ValueFromPipelineByPropertyName=$True,Position=0)]  
+    [Alias("File","Shortcut","shortcutFilePath")]  
+    [string]$Path, 
+ 
+    [Parameter(Mandatory=$True,  ValueFromPipelineByPropertyName=$True,Position=1)]  
+    [Alias("Target")]  
+    [string]$TargetPath, 
+ 
+    [Parameter(ValueFromPipelineByPropertyName=$True,Position=2)]   
+    [Alias("WorkingDirectory","WorkingDir")] 
+    [string]$WorkDir, 
+
+    [Parameter(ValueFromPipelineByPropertyName=$True,Position=3)]  
+    [Alias("Args","Argument")]  
+    [string]$Arguments, 
+ 
+    [Parameter(ValueFromPipelineByPropertyName=$True,Position=4)]   
+    [Alias("iconLocation")]  
+    [string]$Icon, 
+ 
+    [Parameter(ValueFromPipelineByPropertyName=$True,Position=5)]   
+    [Alias("Desc")] 
+    [string]$Description, 
+ 
+    [Parameter(ValueFromPipelineByPropertyName=$True,Position=6)]   
+    [string]$HotKey, 
+ 
+    [Parameter(ValueFromPipelineByPropertyName=$True,Position=7)]   
+    [int]$WindowStyle, 
+ 
+    [Parameter(ValueFromPipelineByPropertyName=$True)]   
+    [switch]$admin,
+
+   [Parameter(ValueFromPipelineByPropertyName=$True)]   
+   [switch]$pintotaskbar
+) 
+ 
+ 
+Process { 
+ 
+  If (!($Path -match "^.*(\.lnk)$")) { 
+    $Path = "$Path`.lnk" 
+  } 
+  [System.IO.FileInfo]$Path = $Path 
+  Try { 
+    If (!(Test-Path $Path.DirectoryName)) { 
+      md $Path.DirectoryName -ErrorAction Stop | Out-Null 
+    } 
+  } Catch { 
+    Write-Verbose "Unable to create $($Path.DirectoryName), shortcut cannot be created" 
+    Return $false 
+    Break 
+  } 
+ 
+  # Define Shortcut Properties 
+  $WshShell = New-Object -ComObject WScript.Shell 
+  $Shortcut = $WshShell.CreateShortcut($Path.FullName) 
+  $Shortcut.TargetPath = $TargetPath 
+  $Shortcut.Arguments = $Arguments 
+  $Shortcut.Description = $Description 
+  $Shortcut.HotKey = $HotKey 
+  $Shortcut.WorkingDirectory = $WorkDir 
+  $Shortcut.WindowStyle = $WindowStyle 
+  If ($Icon){ 
+    $Shortcut.IconLocation = $Icon 
+  } 
+ 
+  Try { 
+    # Create Shortcut 
+    $Shortcut.Save() 
+    # Set Shortcut to Run Elevated 
+    If ($admin) {      
+      $TempFileName = [IO.Path]::GetRandomFileName() 
+      $TempFile = [IO.FileInfo][IO.Path]::Combine($Path.Directory, $TempFileName) 
+      $Writer = New-Object System.IO.FileStream $TempFile, ([System.IO.FileMode]::Create) 
+      $Reader = $Path.OpenRead() 
+      While ($Reader.Position -lt $Reader.Length) { 
+        $Byte = $Reader.ReadByte() 
+        If ($Reader.Position -eq 22) {$Byte = 34} 
+        $Writer.WriteByte($Byte) 
+      } 
+      $Reader.Close() 
+      $Writer.Close() 
+      $Path.Delete() 
+      Rename-Item -Path $TempFile -NewName $Path.Name | Out-Null 
+    }
+    If ($pintotaskbar) 
+      {
+      $scfilename = $Path.FullName
+      $pinverb = (new-object -com "shell.application").namespace($(split-path -parent $Path.FullName)).Parsename($(split-path -leaf $Path.FullName)).verbs() | ?{$_.Name -eq 'Pin to Tas&kbar'}
+      If ($pinverb) {$pinverb.doit()}
+      }
+    Return $True 
+  } Catch { 
+    Write-Verbose "Unable to create $($Path.FullName)" 
+    Write-Verbose $Error[0].Exception.Message 
+    Return $False 
+  } 
+
+} 
+} 
+
+Function Test-IfVariableorObjPropIsSetAndNotFalse {
+[CmdletBinding()]
+param (
+  [parameter(Mandatory=$True,Position=0)][string]$Name
+)
+$VariableIsNotNullNotFalseNotZero = $False
+
+if ($name.Contains(".")) {
+  If (test-path ('variable:'+$name.remove($name.indexof(".")))) {
+    $VariableIsNotNullNotFalseNotZero = [bool](Invoke-Expression "`$$name") 
+  }
+} Else {
+  If (test-path ('variable:'+$name)) {
+    $VariableIsNotNullNotFalseNotZero = [bool](Get-Variable -Name $name -value) 
+  }
+}
+
+return $VariableIsNotNullNotFalseNotZero
+}
+
+Switch (Console-Prompt -Caption "Proceed?" -Message "Running this script will make the above changes, proceed?" -choice "&Yes=Yes", "&No=No" -default 1)
+  {
+  1 {
+    Write-Warning "Installation was exited by user."
+    Exit
+    }
+  }
 
 "Getting Started..." | out-default
 
-Set-ExecutionPolicy RemoteSigned
+If (-not([bool](Get-Executionpolicy -scope LocalMachine | select-string -pattern @("RemoteSigned","Unrestricted") -simplematch)))
+  {
+  If (-not([bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544")))
+    {Throw "You must be admin to set the execution policy"}
+  Else
+    {
+    Write-output "Setting Machine Execution Policy to `"RemoteSigned`""
+    Try {Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force -ErrorAction SilentlyContinue}
+    Catch{}
+    }
+  }
+Else
+  {Write-output "Machine Execution Policy Already Set"}
+
+If (-not([bool](Get-Executionpolicy -scope MachinePolicy | select-string -pattern @("RemoteSigned","Unrestricted","Undefined") -simplematch)) -AND -not([bool](Get-Executionpolicy -scope UserPolicy | select-string -pattern @("RemoteSigned","Unrestricted","Undefined") -simplematch)))
+  {
+  Write-Warning "Group Policy is overriding the Execution Policy setting that was just made, below is a full list of the execution policy settings..."
+  Get-ExecutionPolicy -List
+  }
 
 $os = (Get-WmiObject "Win32_OperatingSystem")
 
@@ -23,12 +194,20 @@ If (!(Test-Path env:ChocolateyInstall))
   iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')) 
   $env:path = "$($env:ALLUSERSPROFILE)\chocolatey\bin;$($env:Path)"
   }
+Else
+  { Write-output "Chocolatey already present, skipping install..."
+  }
 
 Write-Output "Installing Packages"
  cinst -y windbg -version "8.59.20141003" --force
  cinst -y procmon -version "3.2" --force
  cinst -y procexp -version "16.05" --force
  cinst -y spystudio -version "2.9.1.0" --force
+
+Write-output "Creating and pinning `"$env:public\Desktop\CSI-Windows Labs PowerShell Prompt.lnk`" (overwriting if present)"
+$results = Add-Shortcut "$env:public\Desktop\Procmon.lnk" "$env:chocolateyinstall\bin\procmon.exe" -admin -pintotaskbar
+$results = Add-Shortcut "$env:public\Desktop\Procexp.lnk" "$env:chocolateyinstall\bin\procexp.exe" -admin -pintotaskbar
+$results = Add-Shortcut "$env:public\Desktop\Nektra Spy Studio.lnk" "$env:chocolateyinstall\bin\spystudio.exe" -admin -pintotaskbar
 
 Write-output "`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n"
 Write-output "Your Machine is Ready to Analyze Processes"
