@@ -1,4 +1,3 @@
-
 Function Console-Prompt {
   Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
 $choicedesc = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription] 
@@ -29,8 +28,7 @@ Write-Output "Installing Packages"
  cinst -y windbg -version "8.59.20141003" --force
  cinst -y procmon -version "3.2" --force
  cinst -y procexp -version "16.05" --force
- cinst -y apimonitor -version "2.13" --force
- cinst -y nektraspystudio -version "2.9.1.0" --force
+ cinst -y spystudio -version "2.9.1.0" --force
 
 Write-output "`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n"
 Write-output "Your Machine is Ready to Analyze Processes"
