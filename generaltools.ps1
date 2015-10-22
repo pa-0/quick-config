@@ -225,15 +225,15 @@ choco install winmerge -confirm
 choco install procmon -confirm
 choco install procexp -confirm
 #choco install notepadplusplus -confirm
-choco install chefdk
+#choco install chefdk -confirm
 choco install rdcman -confirm
 choco install previewconfig -version 1.2.0.0 -confirm
 choco install greenshot -confirm
 choco install conemu -confirm
-choco install 7zip -confirm
+#choco install 7zip -confirm
 choco install virtualbox -confirm
-choco install chrome -confirm
-choco install powershell -version 5.0.10514-ProductionPreview -confirm
+##choco install chrome -confirm
+#choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
 Write-host "Manually configure SystemExplorer"
 
