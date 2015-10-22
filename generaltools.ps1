@@ -1,4 +1,4 @@
-$Description = "AM-Tools - basic chocolatey install configured for AM Tools for DevOps Development"
+$Description = "DJS Tools - basic chocolatey install configured for DJS Tools for DevOps Development"
 $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
   [2] Disables Quick Edit mode on PowerShell consoles.
