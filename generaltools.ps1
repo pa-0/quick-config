@@ -263,3 +263,5 @@ Else
 
 Write-output "Creating and pinning `"$env:public\Desktop\WWTools PowerShell Prompt.lnk`" (overwriting if present)"
 $results = Add-Shortcut "$env:public\Desktop\WWTools PowerShell Prompt.lnk" "$env:windir\system32\windowspowershell\v1.0\powershell.exe" -Arguments "-noexit -command `"cd $env:public\WWTools`"" -admin -pintotaskbar | out-null
+
+Write-Warning "Please restart the system for all changes to take effect"
