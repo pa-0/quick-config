@@ -239,6 +239,7 @@ choco install procexp -confirm
 choco install notepadplusplus -confirm
 choco install chefdk -confirm
 choco install rdcman -confirm
+choco install gitextensions -confirm
 choco install previewconfig -version 1.2.0.0 -confirm
 choco install greenshot -confirm
 choco install conemu -confirm
