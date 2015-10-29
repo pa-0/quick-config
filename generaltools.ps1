@@ -22,6 +22,18 @@ Function Test-ProcHasAdmin {Return [bool](([System.Security.Principal.WindowsIde
 If (!(Test-ProcHasAdmin))
   {Throw "You must be running as an administrator, please restart as administrator"}
 
+Function Test-IsVirtual {
+  $IsVirtual = $False
+  #Check for AWS
+  Try {$response = [system.net.webrequest]::Create('http://169.254.169.254/').Getresponse();$IsVirtual = $True}
+  Catch {}
+  #Check for VirtualBox
+  If ((gwmi win32_bios).verson -match "VBOX") { $IsVirtual = $True}
+  #Check for VMWare, HyperV
+  If ((gwmi win32_computersystem).model -ilike "*virtual*") { $IsVirtual = $True}
+  Return $IsVirtual
+}
+
 Function Console-Prompt {
   Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
 $choicedesc = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription] 
@@ -224,16 +236,17 @@ git config --global credential.helper wincred
 choco install winmerge -confirm
 choco install procmon -confirm
 choco install procexp -confirm
-#choco install notepadplusplus -confirm
-#choco install chefdk -confirm
+choco install notepadplusplus -confirm
+choco install chefdk -confirm
 choco install rdcman -confirm
 choco install previewconfig -version 1.2.0.0 -confirm
 choco install greenshot -confirm
 choco install conemu -confirm
-#choco install 7zip -confirm
-choco install virtualbox -confirm
-##choco install chrome -confirm
-#choco install powershell -version 5.0.10514-ProductionPreview -confirm
+choco install 7zip -confirm
+If (!(Test-IsVirtual) {choco install virtualbox -confirm}
+choco install JSONedit -pre -confirm
+choco install powershell -version 5.0.10514-ProductionPreview -confirm
+choco install chrome -confirm
 
 Write-host "Manually configure SystemExplorer"
 
