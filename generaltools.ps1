@@ -245,12 +245,11 @@ choco install greenshot -confirm
 choco install conemu -confirm
 choco install 7zip -confirm
 If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
+choco install chrome -confirm
 choco install chefdk -confirm
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
-choco install chrome -confirm
 
-Write-host "Manually configure SystemExplorer"
-
+rite-host "Manually configure SystemExplorer"
 
 <#
 choco sources add -name nuget -source https://www.nuget.org/api/v2/
