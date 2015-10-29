@@ -240,12 +240,12 @@ choco install notepadplusplus -confirm
 choco install rdcman -confirm
 choco install gitextensions -confirm
 choco install previewconfig -confirm -version 1.2.0.0
+choco install JSONedit -confirm -version 0.9.14
 choco install greenshot -confirm
 choco install conemu -confirm
 choco install 7zip -confirm
 If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
 choco install chefdk -confirm
-choco install JSONedit -confirm -version 0.9.14
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
 choco install chrome -confirm
 
