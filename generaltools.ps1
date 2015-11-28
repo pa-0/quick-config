@@ -236,7 +236,7 @@ git config --global credential.helper wincred
 choco install winmerge -confirm
 choco install procmon -confirm
 choco install procexp -confirm
-choco install notepadplusplus -confirm
+#choco install notepadplusplus -confirm
 choco install rdcman -confirm
 choco install gitextensions -confirm
 choco install previewconfig -confirm -version 1.2.0.0
@@ -247,6 +247,8 @@ choco install 7zip -confirm
 If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
 choco install chrome -confirm
 choco install chefdk -confirm
+choco install atom -confirm
+choco install posh-git -confirm
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
 rite-host "Manually configure SystemExplorer"
