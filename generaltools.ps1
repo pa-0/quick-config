@@ -248,6 +248,11 @@ If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
 choco install chrome -confirm
 choco install chefdk -confirm
 choco install atom -confirm
+apm install open-conemu-here
+apm install language-powershell
+apm install metro-ui
+apm install metro-syntax
+apm install git-control
 choco install posh-git -confirm
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
