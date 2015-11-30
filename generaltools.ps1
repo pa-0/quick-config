@@ -253,6 +253,9 @@ apm install language-powershell
 apm install metro-ui
 apm install metro-syntax
 apm install git-control
+apm install language-chef
+apm install atom-json-editor
+apm install commentcode
 choco install posh-git -confirm
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
