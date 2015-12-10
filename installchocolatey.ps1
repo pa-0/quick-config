@@ -43,5 +43,5 @@ if (!($CurrentProcessPath -ilike "*\git\cmd*"))
 git config --global credential.helper wincred
 
 choco install nuget.client
-choco install nuget.commandline
+choco install nuget.commandline -source http://nuget.org/api/v2/
 $env:path = $env:path + ";C:\Program Files (x86)\git\cmd"
