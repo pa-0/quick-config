@@ -1,4 +1,3 @@
-
 Function Console-Prompt {
   Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
 $choicedesc = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription] 
@@ -26,8 +25,7 @@ If (!(Test-Path env:ChocolateyInstall))
   }
 
 Write-Output "Installing Packages"
-cinst -y notepadplusplus
-cinst -y warmup
+cinst -y atom
 cinst -y git
 $gitpath = 'C:\Program Files (x86)\git\cmd'
 $CurrentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
@@ -45,6 +43,3 @@ git config --global credential.helper wincred
 
 choco install nuget.commandline
 $env:path = $env:path + ";C:\Program Files (x86)\git\cmd"
-cd $env:chocolateyinstall
-git clone https://github.com/chocolatey/chocolateytemplates.git
-cd chocolateytemplates\_templates
