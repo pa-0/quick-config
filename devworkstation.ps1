@@ -111,7 +111,7 @@ Else
 
 Write-output "Setting Up GIT"
 cinst -y git
-$gitpath = 'C:\Program Files (x86)\git\cmd'
+$gitpath = 'C:\Program Files\git\cmd'
 $CurrentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
 $CurrentProcessPath = [Environment]::GetEnvironmentVariable("Path", "Process")
 if (!($CurrentMachinePath -ilike "*\git\cmd*"))
