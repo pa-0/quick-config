@@ -67,6 +67,24 @@ if ($name.Contains(".")) {
 return $VariableIsNotNullNotFalseNotZero
 }
 
+Function ReReadEnvVarsIntoThisProcess
+{
+foreach($level in "Machine","User") 
+  {
+   [Environment]::GetEnvironmentVariables($level).GetEnumerator() | % {
+      # For Path variables, append the new values, if they're not already in there
+      if($_.Name -match 'Path$') { 
+         $_.Value = ($((Get-Content "Env:$($_.Name)") + ";$($_.Value)") -split ';' | Select -unique) -join ';'
+      }
+	  #For PSModulePath, append the new values, if they're not already in there
+      if($_.Name -match 'PSModulePath$') { 
+         $_.Value = ($((Get-Content "Env:$($_.Name)") + ";$($_.Value)") -split ';' | Select -unique) -join ';'
+      }
+      $_
+   } | Set-Content -Path { "Env:$($_.Name)" }
+  }
+}
+
 Switch (Console-Prompt -Caption "Proceed?" -Message "Running this script will make the above changes, proceed?" -choice "&Yes=Yes", "&No=No" -default 1)
   {
   1 {
@@ -111,6 +129,8 @@ Else
 
 Write-output "Setting Up GIT"
 cinst -y git
+ReReadEnvVarsIntoThisProcess
+<#
 $gitpath = 'C:\Program Files\git\cmd'
 $CurrentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
 $CurrentProcessPath = [Environment]::GetEnvironmentVariable("Path", "Process")
@@ -123,6 +143,8 @@ if (!($CurrentProcessPath -ilike "*\git\cmd*"))
   {
   [Environment]::SetEnvironmentVariable("Path", $CurrentProcessPath + ";$gitpath", "Process")
   }
+#>
+
 git config --global credential.helper wincred
 
 choco sources add -name nuget -source https://www.nuget.org/api/v2/
