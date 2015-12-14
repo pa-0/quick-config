@@ -7,10 +7,10 @@ $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
   [2] Installs chocolatey package manager.
   [3] Configures Chocolatey for nuget.org feed.
-  [4] Installs git and poshgit
-  [5] Installs Visual Studio 2013 Professional
-  [6] Installs DevExpress.
-  [7] Configures Chocolatey for nuget.org feed.
+  [4] Configures Chocolatey for nuget.org feed.
+  [5] Installs git and poshgit
+  [6] Installs Visual Studio 2013 Professional
+  [7] Installs DevExpress.
 "@
 
 clear-host
