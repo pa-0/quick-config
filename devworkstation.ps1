@@ -129,8 +129,9 @@ Else
   }
 
 Write-output "Setting Up GIT"
-cinst -y git
+choco install git -confirm
 ReReadEnvVarsIntoThisProcess
+write-output "Path: $env:path"
 <#
 $gitpath = 'C:\Program Files\git\cmd'
 $CurrentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
