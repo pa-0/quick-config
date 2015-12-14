@@ -5,13 +5,12 @@
 $Description = "Dev Workstation for Compiling"
 $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
-  [2] Disables Quick Edit mode on PowerShell consoles.
-  [3] Adds folder $env:public\WWTools
-  [4] Adds the shortcut "WWTools PowerShell Prompt" to Desktop which 
-      starts PowerShell elevated in the folder $env:public\WWTools.
-  [5] Pins the WWTools prompt to the taskbar.
-  [6] Installs chocolatey package manager.
-  [7] Configures Chocolatey for additional package sources.
+  [2] Installs chocolatey package manager.
+  [3] Configures Chocolatey for nuget.org feed.
+  [4] Installs git and poshgit
+  [5] Installs Visual Studio 2013 Professional
+  [6] Installs DevExpress.
+  [7] Configures Chocolatey for nuget.org feed.
 "@
 
 clear-host
