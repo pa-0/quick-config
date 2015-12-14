@@ -127,6 +127,6 @@ if (!($CurrentProcessPath -ilike "*\git\cmd*"))
 git config --global credential.helper wincred
 
 choco sources add -name nuget -source https://www.nuget.org/api/v2/
-choco install poshgit -confirm
-choco install visualstudio2013professional -version 12.0.40629.20150920 -confirm
-choco install wwdevexpress -source '\\ppstorage\pestpac\dev\DevExpress12.2.16' -confirm
+choco install poshgit -confirm -force
+choco install visualstudio2013professional -version 12.0.40629.20150920 -confirm  -force
+choco install wwdevexpress -source '\\ppstorage\pestpac\dev\DevExpress12.2.16' -confirm  -force
