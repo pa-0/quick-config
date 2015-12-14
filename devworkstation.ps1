@@ -129,7 +129,7 @@ Else
   }
 
 Write-output "Setting Up GIT"
-choco install git -confirm -force -params '"/GitOnlyOnPath"'
+choco install git -params '/GitOnlyOnPath' -confirm -force 
 ReReadEnvVarsIntoThisProcess
 write-output "Path: $env:path"
 <#
