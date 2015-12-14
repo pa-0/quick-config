@@ -2,7 +2,7 @@
 #  1) Open an ELEVATED CMD.Exe Prompt
 #  2) Drop in this command: @powershell -NoProfile -ExecutionPolicy unrestricted -Command "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/devworkstation.ps1'))"
 
-$Description = "Dev Workstation for Compiling"
+$Description = "Setup Dev Workstation or CI Server for Compiling"
 $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
   [2] Installs chocolatey package manager.
