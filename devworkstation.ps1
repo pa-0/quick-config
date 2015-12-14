@@ -69,7 +69,7 @@ return $VariableIsNotNullNotFalseNotZero
 
 Function ReReadEnvVarsIntoThisProcess
 {
-Write-ouput "Re-Reading Environment Variables Into Current Process..."
+Write-output "Re-Reading Environment Variables Into Current Process..."
 foreach($level in "Machine","User") 
   {
    [Environment]::GetEnvironmentVariables($level).GetEnumerator() | % {
