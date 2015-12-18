@@ -66,6 +66,3 @@ If (!(Test-Path env:ChocolateyInstall))
   }
 
 Write-Output "Installing Packages"
-
-choco install nuget.client -source http://nuget.org/api/v2/
-choco install nuget.commandline -source http://nuget.org/api/v2/
