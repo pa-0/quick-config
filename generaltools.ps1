@@ -256,6 +256,10 @@ apm install git-control
 apm install language-chef
 apm install atom-json-editor
 apm install commentcode
+apm install linter
+apm install highlight-selected
+apm install seti-ui
+apm install monokai-seti
 choco install posh-git -confirm
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
