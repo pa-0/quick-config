@@ -260,6 +260,7 @@ apm install linter
 apm install highlight-selected
 apm install seti-ui
 apm install monokai-seti
+apm install sync-settings
 choco install posh-git -confirm
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
