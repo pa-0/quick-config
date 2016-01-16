@@ -248,6 +248,8 @@ If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
 choco install chrome -confirm
 choco install chefdk -confirm
 choco install atom -confirm
+apm install sync-settings
+#1ad3a1c2695cd535808a4b29ff28ecff50d85c2d,fdf6b146f96b930eda69
 apm install open-conemu-here
 apm install language-powershell
 apm install metro-ui
@@ -260,7 +262,7 @@ apm install linter
 apm install highlight-selected
 apm install seti-ui
 apm install monokai-seti
-apm install sync-settings
+
 choco install posh-git -confirm
 choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
