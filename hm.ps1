@@ -1,4 +1,3 @@
-
 # [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};set-executionpolicy remotesigned ;iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/hm.ps1'))
 
 $Description = "DJS Tools - basic chocolatey install configured for DJS Tools for DevOps Development"
@@ -229,7 +228,7 @@ choco install flashplayeractivex -confirm
 choco install adobeshockwaveplayer -confirm
 choco install flashplayerppapi -confirm
 choco install pdfxchangeviewer -confirm
-choco install powershell -version 5.0.10514-ProductionPreview -confirm
+choco install googlechrome -confirm
 
 
 Write-Warning "Please restart the system for all changes to take effect"
