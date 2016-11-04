@@ -1,3 +1,6 @@
+
+# [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};set-executionpolicy remotesigned ;iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/hm.ps1'))
+
 $Description = "DJS Tools - basic chocolatey install configured for DJS Tools for DevOps Development"
 $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
