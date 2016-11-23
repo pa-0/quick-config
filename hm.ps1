@@ -222,12 +222,12 @@ choco install procexp -confirm
 choco install greenshot -confirm
 choco install 7zip -confirm
 choco install inkscape -confirm
+choco install googlechrome -confirm
 choco install flashplayerplugin -confirm
 choco install flashplayeractivex -confirm
 choco install adobeshockwaveplayer -confirm
 choco install flashplayerppapi -confirm
 choco install pdfxchangeviewer -confirm
-choco install googlechrome -confirm
 
 
 Write-Warning "Please restart the system for all changes to take effect"
