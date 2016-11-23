@@ -221,7 +221,6 @@ choco install procmon -confirm
 choco install procexp -confirm
 choco install greenshot -confirm
 choco install 7zip -confirm
-choco install chrome -confirm
 choco install inkscape -confirm
 choco install flashplayerplugin -confirm
 choco install flashplayeractivex -confirm
