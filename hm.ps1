@@ -228,6 +228,7 @@ choco install flashplayeractivex -confirm
 choco install adobeshockwaveplayer -confirm
 choco install flashplayerppapi -confirm
 choco install pdfxchangeviewer -confirm
+choco install vlc -confirm
 
 
 Write-Warning "Please restart the system for all changes to take effect"
