@@ -1,4 +1,3 @@
-
 #powershell -NoProfile -ExecutionPolicy remotesigned -Command "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/generaltools.ps1'))"
 
 $Description = "Tools for Work"
@@ -247,7 +246,7 @@ choco install JSONedit -confirm -version 0.9.14
 choco install conemu -confirm
 choco install 7zip -confirm
 If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
-choco install chrome -confirm
+choco install googlechrome -confirm
 choco install atom -confirm
 apm install sync-settings
 #1ad3a1c2695cd535808a4b29ff28ecff50d85c2d,fdf6b146f96b930eda69
