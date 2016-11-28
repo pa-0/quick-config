@@ -1,5 +1,7 @@
-
 #From: http://www.toddklindt.com/blog/Lists/Posts/Post.aspx?ID=368
+
+#powershell -NoProfile -ExecutionPolicy remotesigned -Command "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/Server2012AD.ps1'))"
+
 
 Import-module servermanager]
 Add-WindowsFeature AD-Domain-Services
