@@ -1,10 +1,10 @@
-$Description = "DJS Tools - basic chocolatey install configured for DJS Tools for DevOps Development"
+$Description = "Tools for Work"
 $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
   [2] Disables Quick Edit mode on PowerShell consoles.
-  [3] Adds folder $env:public\WWTools
+  [3] Adds folder $env:public\gitrepos
   [4] Adds the shortcut "WWTools PowerShell Prompt" to Desktop which 
-      starts PowerShell elevated in the folder $env:public\WWTools.
+      starts PowerShell elevated in the folder $env:public\gitrepos.
   [5] Pins the WWTools prompt to the taskbar.
   [6] Installs chocolatey package manager.
   [7] Configures Chocolatey for additional package sources.
@@ -236,49 +236,28 @@ git config --global credential.helper wincred
 choco install winmerge -confirm
 choco install procmon -confirm
 choco install procexp -confirm
-#choco install notepadplusplus -confirm
-choco install rdcman -confirm
 choco install gitextensions -confirm
+#choco install gitkracken -confirm
 choco install previewconfig -confirm -version 1.2.0.0
 choco install JSONedit -confirm -version 0.9.14
-choco install greenshot -confirm
+#choco install greenshot -confirm
 choco install conemu -confirm
 choco install 7zip -confirm
 If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
 choco install chrome -confirm
-choco install chefdk -confirm
 choco install atom -confirm
 apm install sync-settings
 #1ad3a1c2695cd535808a4b29ff28ecff50d85c2d,fdf6b146f96b930eda69
-apm install open-conemu-here
-apm install language-powershell
-apm install metro-ui
-apm install metro-syntax
-apm install git-control
-apm install language-chef
-apm install atom-json-editor
-apm install commentcode
-apm install linter
-apm install highlight-selected
-apm install seti-ui
-apm install monokai-seti
 
 choco install posh-git -confirm
-choco install powershell -version 5.0.10514-ProductionPreview -confirm
 
-rite-host "Manually configure SystemExplorer"
-
-<#
-choco sources add -name nuget -source https://www.nuget.org/api/v2/
-#>
-
-If (!(Test-Path $env:public\WWTools))
-  {New-Item $env:public\WWTools -ItemType Directory | out-null
-  Write-output "Created $env:public\WWTools"}
+If (!(Test-Path $env:public\gitrepos))
+  {New-Item $env:public\gitrepos -ItemType Directory | out-null
+  Write-output "Created $env:public\gitrepos"}
 Else
-  { Write-output "$env:public\WWTools already present, skipping install..."}
+  { Write-output "$env:public\gitrepos already present, skipping install..."}
 
 Write-output "Creating and pinning `"$env:public\Desktop\WWTools PowerShell Prompt.lnk`" (overwriting if present)"
-$results = Add-Shortcut "$env:public\Desktop\WWTools PowerShell Prompt.lnk" "$env:windir\system32\windowspowershell\v1.0\powershell.exe" -Arguments "-noexit -command `"cd $env:public\WWTools`"" -admin -pintotaskbar | out-null
+$results = Add-Shortcut "$env:public\Desktop\WWTools PowerShell Prompt.lnk" "$env:windir\system32\windowspowershell\v1.0\powershell.exe" -Arguments "-noexit -command `"cd $env:public\gitrepos`"" -admin -pintotaskbar | out-null
 
 Write-Warning "Please restart the system for all changes to take effect"
