@@ -253,6 +253,7 @@ apm install sync-settings
 #fdf6b146f96b930eda69
 
 choco install javaruntime -confirm
+choco install evernote -confirm
 
 choco install poshgit -confirm
 
