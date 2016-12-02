@@ -230,5 +230,7 @@ choco install flashplayerppapi -confirm
 choco install pdfxchangeviewer -confirm
 choco install vlc -confirm
 
+choco install -confirm Office365Business -source https://www.myget.org/F/chocotesting/api/v2/ -params '"/OfficeProdIDsToExclude:Access,Groove,InfoPath,Lync,OneDrive,OneNote,Outlook,SharePointDesigner,Visio"' -force 
+
 
 Write-Warning "Please restart the system for all changes to take effect"
