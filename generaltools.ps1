@@ -251,11 +251,11 @@ choco install atom -confirm
 apm install sync-settings
 #1ad3a1c2695cd535808a4b29ff28ecff50d85c2d,
 #fdf6b146f96b930eda69
-
 choco install javaruntime -confirm
 choco install evernote -confirm
-
 choco install poshgit -confirm
+choco install awscli -confirm
+choco install awstools.powershell -confirm
 
 If (!(Test-Path $env:public\gitrepos))
   {New-Item $env:public\gitrepos -ItemType Directory | out-null
