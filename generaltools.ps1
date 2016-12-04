@@ -256,6 +256,7 @@ choco install evernote -confirm
 choco install poshgit -confirm
 choco install awscli -confirm
 choco install awstools.powershell -confirm
+choco install f.lux -confirm #reduce monitor blue light after sunset
 
 If (!(Test-Path $env:public\gitrepos))
   {New-Item $env:public\gitrepos -ItemType Directory | out-null
