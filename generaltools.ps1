@@ -257,6 +257,7 @@ choco install poshgit -confirm
 choco install awscli -confirm
 choco install awstools.powershell -confirm
 choco install f.lux -confirm #reduce monitor blue light after sunset
+choco install audioswitcher -confirm #easily change audio between headset and speakers.
 
 If (!(Test-Path $env:public\gitrepos))
   {New-Item $env:public\gitrepos -ItemType Directory | out-null
