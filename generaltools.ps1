@@ -258,6 +258,7 @@ choco install awscli -confirm
 choco install awstools.powershell -confirm
 choco install f.lux -confirm #reduce monitor blue light after sunset
 choco install audioswitcher -confirm #easily change audio between headset and speakers.
+choco install powershell-core -pre -confirm #install PowerSHell Core for compat testing with PS for Linxu / MacOS
 
 If (!(Test-Path $env:public\gitrepos))
   {New-Item $env:public\gitrepos -ItemType Directory | out-null
