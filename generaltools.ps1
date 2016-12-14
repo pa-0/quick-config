@@ -248,19 +248,23 @@ choco install 7zip -confirm
 If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
 choco install googlechrome -confirm
 choco install atom -confirm
+refreshenv
 apm install sync-settings
 #1ad3a1c2695cd535808a4b29ff28ecff50d85c2d,
 #fdf6b146f96b930eda69
 choco install javaruntime -confirm
-choco install evernote -confirm
 choco install poshgit -confirm
 choco install awscli -confirm
 choco install awstools.powershell -confirm
-choco install f.lux -confirm #reduce monitor blue light after sunset
-choco install audioswitcher -confirm #easily change audio between headset and speakers.
 choco install powershell-core -pre -confirm #install PowerSHell Core for compat testing with PS for Linxu / MacOS
 choco install python -confirm
+refreshenv
+pip install boto3
 
+#Personal
+choco install evernote -confirm
+choco install f.lux -confirm #reduce monitor blue light after sunset
+choco install audioswitcher -confirm #easily change audio between headset and speakers.
 
 If (!(Test-Path $env:public\gitrepos))
   {New-Item $env:public\gitrepos -ItemType Directory | out-null
