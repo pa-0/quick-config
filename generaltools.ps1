@@ -261,6 +261,7 @@ choco install awscli -confirm
 choco install awstools.powershell -confirm
 #choco install powershell-core -pre -confirm #install PowerSHell Core for compat testing with PS for Linxu / MacOS
 choco install python -confirm
+choco install powershell -confirm
 refreshenv
 pip install boto3
 
