@@ -235,42 +235,46 @@ if (!($CurrentProcessPath -ilike "*\git\cmd*"))
   }
 git config --global credential.helper wincred
 
+choco install visualstudiocode -confirm
+code --install-extension ms-vscode.PowerShell
+
 choco install winmerge -confirm
-choco install procmon -confirm
-choco install procexp -confirm
+#choco install procmon -confirm
+#choco install procexp -confirm
 choco install gitextensions -confirm
 #choco install gitkracken -confirm
 choco install previewconfig -confirm -version 1.2.0.0
-choco install JSONedit -confirm -version 0.9.14
-#choco install greenshot -confirm
+#choco install JSONedit -confirm -version 0.9.14
+choco install greenshot -confirm
 choco install conemu -confirm
 choco install 7zip -confirm
-If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
+#If (!(Test-IsVirtual)) {choco install virtualbox -confirm}
 choco install googlechrome -confirm
-choco install atom -confirm
-refreshenv
-apm install sync-settings
+#choco install atom -confirm
+#refreshenv
+#apm install sync-settings
 #1ad3a1c2695cd535808a4b29ff28ecff50d85c2d,
 #fdf6b146f96b930eda69
 choco install javaruntime -confirm
 choco install poshgit -confirm
 choco install awscli -confirm
 choco install awstools.powershell -confirm
-choco install powershell-core -pre -confirm #install PowerSHell Core for compat testing with PS for Linxu / MacOS
+#choco install powershell-core -pre -confirm #install PowerSHell Core for compat testing with PS for Linxu / MacOS
 choco install python -confirm
 refreshenv
 pip install boto3
 
 #Personal
-choco install evernote -confirm
-choco install f.lux -confirm #reduce monitor blue light after sunset
-choco install audioswitcher -confirm #easily change audio between headset and speakers.
+#choco install evernote -confirm
+#choco install f.lux -confirm #reduce monitor blue light after sunset
+#choco install audioswitcher -confirm #easily change audio between headset and speakers.
 
-If (!(Test-Path $env:public\gitrepos))
-  {New-Item $env:public\gitrepos -ItemType Directory | out-null
-  Write-output "Created $env:public\gitrepos"}
+$gitroot = "$env:userprofile\gitrepos"
+If (!(Test-Path $gitroot ))
+  {New-Item $gitroot -ItemType Directory | out-null
+  Write-output "Created $gitroot"}
 Else
-  { Write-output "$env:public\gitrepos already present, skipping install..."}
+  { Write-output "$gitroot already present, skipping install..."}
 
 Write-output "Creating and pinning `"$env:public\Desktop\GitRepos PowerShell Prompt.lnk`" (overwriting if present)"
 $results = Add-Shortcut "$env:public\Desktop\GitRepos PowerShell Prompt.lnk" "$env:windir\system32\windowspowershell\v1.0\powershell.exe" -Arguments "-noexit -command `"cd $env:public\gitrepos`"" -admin -pintotaskbar | out-null
