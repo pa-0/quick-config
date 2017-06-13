@@ -4,9 +4,9 @@ $Description = "Tools for Work"
 $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
   [2] Disables Quick Edit mode on PowerShell consoles.
-  [3] Adds folder $env:public\gitrepos
+  [3] Adds folder $env:userprofile\gitrepos
   [4] Adds the shortcut "GitRepos PowerShell Prompt" to Desktop which 
-      starts PowerShell elevated in the folder $env:public\gitrepos.
+      starts PowerShell elevated in the folder $env:userprofile\gitrepos.
   [5] Pins the GitRepos prompt to the taskbar.
   [6] Installs chocolatey package manager.
   [7] Configures Chocolatey for additional package sources.
@@ -277,7 +277,7 @@ If (!(Test-Path $gitroot ))
 Else
   { Write-output "$gitroot already present, skipping install..."}
 
-Write-output "Creating and pinning `"$env:public\Desktop\GitRepos PowerShell Prompt.lnk`" (overwriting if present)"
-$results = Add-Shortcut "$env:public\Desktop\GitRepos PowerShell Prompt.lnk" "$env:windir\system32\windowspowershell\v1.0\powershell.exe" -Arguments "-noexit -command `"cd $env:public\gitrepos`"" -admin -pintotaskbar | out-null
+Write-output "Creating and pinning `"$env:userprofile\GitRepos PowerShell Prompt.lnk`" (overwriting if present)"
+$results = Add-Shortcut "$env:userprofile\GitRepos PowerShell Prompt.lnk" "$env:windir\system32\windowspowershell\v1.0\powershell.exe" -Arguments "-noexit -command `"cd $env:useprofile\gitrepos`"" -admin -pintotaskbar | out-null
 
 Write-Warning "Please restart the system for all changes to take effect"
