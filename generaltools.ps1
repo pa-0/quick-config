@@ -9,7 +9,7 @@ $Changes = @"
       starts PowerShell elevated in the folder $env:userprofile\gitrepos.
   [5] Pins the GitRepos prompt to the taskbar.
   [6] Installs chocolatey package manager.
-  [7] Configures Chocolatey for additional package sources.
+  [7] Installs a bunch of packages specified in this script.
 "@
 
 clear-host
