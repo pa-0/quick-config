@@ -1,4 +1,4 @@
-#powershell -NoProfile -ExecutionPolicy remotesigned -Command "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/generaltools.ps1'))"
+#powershell -NoProfile -ExecutionPolicy remotesigned -Command "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/jenkinssetup.ps1'))"
 
 $Description = "Jenkins Setup"
 $Changes = @"
