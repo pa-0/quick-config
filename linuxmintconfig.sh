@@ -21,7 +21,7 @@ then
   sudo ./installpsh-debian.sh -includeide
 fi
 
-PKG=google-chrome
+PKG=google-chrome-stable
 if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
   echo "Installing ${PKG}"
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
