@@ -12,3 +12,7 @@ sudo dpkg -i google-chrome-stable_current_amd64.deb
 echo "Removing Chromium Browser"
 sudo apt-get purge chromium-browser  
 rm -rf ~/.config/chromium
+
+echo "Removing Firefox"
+sudo apt-get purge firefox
+rm -rf ~/.mozilla/firefox
