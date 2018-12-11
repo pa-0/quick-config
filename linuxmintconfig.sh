@@ -5,11 +5,11 @@ if [[ ! -z "$(sudo fuser /var/lib/dpkg/lock)" ]]; then
 fi
 
 echo "Removing Chromium Browser"
-sudo apt-get purge chromium-browser  
+sudo apt-get purge chromium-browser -y
 rm -rf ~/.config/chromium
 
 echo "Removing Firefox"
-sudo apt-get purge firefox
+sudo apt-get purge firefox -y
 rm -rf ~/.mozilla/firefox
 
 echo "Installing PowerShell and VS Code"
@@ -22,4 +22,4 @@ sudo apt-get install git -y
 
 echo "Installing Chrome"
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb -f noninteractive
