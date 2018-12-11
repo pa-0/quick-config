@@ -12,14 +12,24 @@ echo "Removing Firefox"
 sudo apt-get purge firefox -y
 rm -rf ~/.mozilla/firefox
 
-echo "Installing PowerShell and VS Code"
-wget https://raw.githubusercontent.com/DarwinJS/PowerShell/issue-8437-installpsh-debian-support-for-linuxmint/tools/installpsh-debian.sh
-chmod 755 installpsh-debian.sh
-sudo ./installpsh-debian.sh -includeide
+PKG=powershell
+if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ];
+then
+  echo "Installing PowerShell and VS Code"
+  wget https://raw.githubusercontent.com/DarwinJS/PowerShell/issue-8437-installpsh-debian-support-for-linuxmint/tools/installpsh-debian.sh
+  chmod 755 installpsh-debian.sh
+  sudo ./installpsh-debian.sh -includeide
+fi
 
-echo "Installing Git"
-sudo apt-get install git -y
+PKG=google-chrome
+if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+  echo "Installing ${PKG}"
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo dpkg -i google-chrome-stable_current_amd64.deb
+fi
 
-echo "Installing Chrome"
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb -f noninteractive
+PKG=git
+if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+  echo "Installing ${PKG}"
+  sudo apt-get install ${PKG} -y
+fi
