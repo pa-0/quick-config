@@ -28,7 +28,7 @@ if [[ "'$*'" =~ devtools ]] ; then
     if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ];
     then
       echo "Installing PowerShell and VS Code"
-      wget https://raw.githubusercontent.com/DarwinJS/PowerShell/issue-8437-installpsh-debian-support-for-linuxmint/tools/installpsh-debian.sh
+      wget https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-debian.sh
       chmod 755 installpsh-debian.sh
       sudo ./installpsh-debian.sh -includeide
     fi
