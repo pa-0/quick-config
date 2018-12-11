@@ -1,4 +1,5 @@
 #!/bin/bash
+# -devtools = setup development tools
 
 echo "Arguments used: $*"
 
