@@ -1,6 +1,7 @@
+#!/bin/bash
 
 echo "Installing PowerShell and VS Code"
-wget https://github.com/DarwinJS/PowerShell/blob/issue-8437-installpsh-debian-support-for-linuxmint/tools/installpsh-debian.sh
+wget https://raw.githubusercontent.com/DarwinJS/PowerShell/issue-8437-installpsh-debian-support-for-linuxmint/tools/installpsh-debian.sh
 chmod 755 installpsh-debian.sh
 sudo ./installpsh-debian.sh -includeide
 
