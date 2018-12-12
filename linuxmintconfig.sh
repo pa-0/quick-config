@@ -61,7 +61,7 @@ fi
 PKG=xiphos
 if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
   echo "Installing ${PKG}"
-  sudo add-apt-repository ppa:unit193/crosswire
+  sudo add-apt-repository ppa:unit193/crosswire -y
   sudo apt-get update
   sudo apt-get install ${PKG} -y
 fi
