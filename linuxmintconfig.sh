@@ -46,3 +46,8 @@ if [[ "'$*'" =~ devtools ]] ; then
     fi
 fi
 
+PKG=e2guardian
+if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
+  echo "Installing ${PKG}"
+  sudo apt-get install ${PKG} -y
+fi
