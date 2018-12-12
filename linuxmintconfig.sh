@@ -22,7 +22,7 @@ if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed")
   sudo dpkg -i google-chrome-stable_current_amd64.deb
 fi
 
-if [[ grep -c 208.67.222.222 /etc/dhcp/dhclient.conf -eq 0 ]]; then
+if [[ $(grep -c 208.67.222.222 /etc/dhcp/dhclient.conf) -eq 0 ]]; then
   echo 'Setting up OpenDNS'
   echo 'supersede domain-name-servers 208.67.222.222,208.67.220.220;' | \
     sudo tee --append /etc/dhcp/dhclient.conf
