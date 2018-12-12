@@ -7,6 +7,8 @@ if [[ ! -z "$(sudo fuser /var/lib/dpkg/lock)" ]]; then
   echo "Package Manager is in use, try again later, exiting..."
 fi
 
+sudo apt-get update
+
 PKG=chromium-browser
 if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -gt 0 ]; then
   echo "Removing Chromium Browser"
@@ -58,10 +60,8 @@ if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed")
   sudo apt-get install ${PKG} -y
 fi
 
-PKG=xiphos
+PKG=bibletime
 if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
   echo "Installing ${PKG}"
-  sudo add-apt-repository ppa:unit193/crosswire -y
-  sudo apt-get update
   sudo apt-get install ${PKG} -y
 fi
