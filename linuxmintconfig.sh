@@ -1,5 +1,10 @@
 #!/bin/bash
 # -devtools = setup development tools
+# -christiantools = setup christian software and settings
+
+    #bash <(wget -qO - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh) <ARGUMENTS>
+    #wget -O - https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh | bash -s <ARGUMENTS>
+    #bash <(curl -s https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/install-powershell.sh) <ARGUMENTS>
 
 echo "Arguments used: $*"
 
@@ -28,13 +33,6 @@ if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed")
   echo "Installing ${PKG}"
   wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
   sudo dpkg -i google-chrome-stable_current_amd64.deb
-fi
-
-if [[ $(grep -c 208.67.222.222 /etc/dhcp/dhclient.conf) -eq 0 ]]; then
-  echo 'Setting up OpenDNS'
-  echo 'supersede domain-name-servers 208.67.222.222,208.67.220.220;' | \
-    sudo tee --append /etc/dhcp/dhclient.conf
-  sudo service network-manager restart
 fi
 
 if [[ "'$*'" =~ devtools ]] ; then
@@ -72,4 +70,11 @@ if [[ "'$*'" =~ christiantools ]] ; then
             sudo apt-get install $i -y
         fi
     done
+    
+    if [[ $(grep -c 208.67.222.222 /etc/dhcp/dhclient.conf) -eq 0 ]]; then
+      echo 'Setting up OpenDNS'
+      echo 'supersede domain-name-servers 208.67.222.222,208.67.220.220;' | \
+        sudo tee --append /etc/dhcp/dhclient.conf
+      sudo service network-manager restart
+    fi
 fi    
