@@ -1,6 +1,6 @@
 # [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {[bool]1};set-executionpolicy remotesigned ;iex ((new-object net.webclient).DownloadString('https://gitlab.com/CSI-Windowscom/quick-config/raw/master/hm.ps1'))
 
-$Description = "DJS Tools - basic chocolatey install configured for DJS Tools for DevOps Development"
+$Description = "Home Tools - basic chocolatey install configured for DJS Tools for Home Machines"
 $Changes = @"
   [1] Sets PowerShell Execution Policy to "RemoteSigned"
   [2] Disables Quick Edit mode on PowerShell consoles.
@@ -221,14 +221,16 @@ choco install procmon -confirm
 choco install procexp -confirm
 choco install greenshot -confirm
 choco install 7zip -confirm
-choco install inkscape -confirm
 choco install googlechrome -confirm
+choco install brave -confirm
+choco install f.lux -confirm
 choco install flashplayerplugin -confirm
 choco install flashplayeractivex -confirm
 choco install adobeshockwaveplayer -confirm
 choco install flashplayerppapi -confirm
 choco install pdfxchangeviewer -confirm
 choco install vlc -confirm
+choco install paint.net -confirm
 
 choco install -confirm Office365Business -source https://www.myget.org/F/chocotesting/api/v2/ -params '"/OfficeProdIDsToExclude:Access,Groove,InfoPath,Lync,OneDrive,OneNote,Outlook,SharePointDesigner,Visio"' -force 
 
