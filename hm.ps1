@@ -1,4 +1,4 @@
-# set-executionpolicy remotesigned ;iex (iwr 'https://gitlab.com/CSI-Windowscom/quick-config/raw/master/hm.ps1')
+# set-executionpolicy remotesigned ;iex (iwr 'https://gitlab.com/DarwinJS/quick-config/raw/master/hm.ps1')
 
 $Description = "Home Tools - basic chocolatey install configured for DJS Tools for Home Machines"
 $Changes = @"
