@@ -35,6 +35,12 @@ if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed")
   sudo dpkg -i google-chrome-stable_current_amd64.deb
 fi
 
+wget -qO- https://deb.opera.com/archive.key | sudo apt-key add -
+echo -e "\ndeb [arch=i386,amd64] https://deb.opera.com/opera-stable/ stable non-free" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt install -y opera-stable
+
+
 if [[ "'$*'" =~ devtools ]] ; then
     echo "Installing Development Tools due to switch '-devtools'"
     PKG=powershell
