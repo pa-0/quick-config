@@ -40,6 +40,11 @@ echo -e "\ndeb [arch=i386,amd64] https://deb.opera.com/opera-stable/ stable non-
 sudo apt update
 sudo apt install -y opera-stable
 
+echo "Installing Cool Retro Term..."
+
+sudo add-apt-repository ppa:vantuz/cool-retro-term
+sudo apt-get update
+sudo apt install -y cool-retro-term
 
 if [[ "'$*'" =~ devtools ]] ; then
     echo "Installing Development Tools due to switch '-devtools'"
