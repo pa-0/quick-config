@@ -46,6 +46,9 @@ sudo add-apt-repository ppa:vantuz/cool-retro-term
 sudo apt-get update
 sudo apt install -y cool-retro-term
 
+echo "Installing virtualization tools"
+sudo apt install -y virtualbox vagrant
+
 if [[ "'$*'" =~ devtools ]] ; then
     echo "Installing Development Tools due to switch '-devtools'"
     PKG=powershell
