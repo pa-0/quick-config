@@ -42,9 +42,13 @@ sudo apt install -y opera-stable
 
 echo "Installing Cool Retro Term..."
 
-sudo add-apt-repository ppa:vantuz/cool-retro-term
+sudo add-apt-repository -y  ppa:vantuz/cool-retro-term
 sudo apt-get update
 sudo apt install -y cool-retro-term
+
+sudo add-apt-repository -y ppa:nathan-renniewaldock/flux
+sudo apt-get update
+sudo apt-get install -y fluxgui
 
 echo "Installing virtualization tools"
 sudo apt install -y virtualbox vagrant
