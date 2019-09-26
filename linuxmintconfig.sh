@@ -72,7 +72,6 @@ sudo mv ./kind /usr/local/bin/kind
 
 echo "commands to setup a cluster (from https://itnext.io/starting-local-kubernetes-using-kind-and-docker-c6089acfc1c0)"
 
-
 echo "sudo kind create cluster"
 echo "sudo kind list cluster"
 
