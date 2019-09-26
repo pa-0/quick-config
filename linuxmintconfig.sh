@@ -1,6 +1,6 @@
 #!/bin/bash
 # -devtools = setup development tools
-# -christiantools = setup christian software and settings
+# -protection = opendns and guardian
 
     #bash <(wget -qO - https://gitlab.com/DarwinJS/quick-config/raw/master/linuxmintconfig.sh) <ARGUMENTS>
     #wget -O - https://gitlab.com/DarwinJS/quick-config/raw/master/linuxmintconfig.sh | bash -s <ARGUMENTS>
@@ -51,7 +51,31 @@ sudo apt-get update
 sudo apt-get install -y fluxgui
 
 echo "Installing virtualization tools"
-sudo apt install -y virtualbox vagrant
+sudo apt install -y virtualbox vagrant docker.io
+
+echo "Installing Go"
+sudo apt install -y golang-go 
+sudo apt install -y gccgo-go
+
+echo "installing kubectl"
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+
+echo "Installing Kind (for Kube in Docker), Docs: https://github.com/kubernetes-sigs/kind"
+#go get -u sigs.k8s.io/kind
+curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.5.1/kind-$(uname)-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/kind
+
+
+echo "commands to setup a cluster (from https://itnext.io/starting-local-kubernetes-using-kind-and-docker-c6089acfc1c0)"
+
+
+echo "sudo kind create cluster"
+echo "sudo kind list cluster"
+
 
 if [[ "'$*'" =~ devtools ]] ; then
     echo "Installing Development Tools due to switch '-devtools'"
@@ -79,8 +103,8 @@ do
     fi
 done
 
-if [[ "'$*'" =~ christiantools ]] ; then
-    packagenames=( bibletime e2guardian )
+if [[ "'$*'" =~ protection ]] ; then
+    packagenames=( e2guardian )
     for i in "${packagenames[@]}"
     do
     	if [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
