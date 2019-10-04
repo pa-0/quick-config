@@ -19,31 +19,17 @@ if [[ -z $(command -v pwsh) ]]; then
   bash <(curl -s https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-osx.sh) -includeide
 fi
 
+brew cask install opera
+
+brew cask install 1password
+
+brew cask install cool-retro-term
+
 exit
 #done
 
 sudo apt-get update
 
-PKG=chromium-browser
-if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -gt 0 ]; then
-  echo "Removing Chromium Browser"
-  sudo apt-get purge chromium-browser -y
-  rm -rf ~/.config/chromium
-fi
-
-PKG=firefox
-if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -gt 0 ]; then
-  echo "Removing Firefox"
-  sudo apt-get purge firefox -y
-  rm -rf ~/.mozilla/firefox
-fi
-
-PKG=google-chrome-stable
-if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-  echo "Installing ${PKG}"
-  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  sudo dpkg -i google-chrome-stable_current_amd64.deb
-fi
 
 wget -qO- https://deb.opera.com/archive.key | sudo apt-key add -
 echo -e "\ndeb [arch=i386,amd64] https://deb.opera.com/opera-stable/ stable non-free" | sudo tee -a /etc/apt/sources.list
@@ -86,46 +72,3 @@ echo "sudo kind create cluster"
 echo "sudo kind list cluster"
 
 
-if [[ "'$*'" =~ devtools ]] ; then
-    echo "Installing Development Tools due to switch '-devtools'"
-    PKG=powershell
-    if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ];
-    then
-      echo "Installing PowerShell and VS Code"
-      wget https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-debian.sh
-      chmod 755 installpsh-debian.sh
-      sudo ./installpsh-debian.sh -includeide
-    fi
-    PKG=git
-    if [ $(dpkg-query -W -f='${Status}' ${PKG} 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-      echo "Installing ${PKG}"
-      sudo apt-get install ${PKG} -y
-    fi
-fi
-
-packagenames=( skypeforlinux )
-for i in "${packagenames[@]}"
-do
-	if [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-        echo "Installing $i"
-        sudo apt-get install $i -y
-    fi
-done
-
-if [[ "'$*'" =~ protection ]] ; then
-    packagenames=( e2guardian )
-    for i in "${packagenames[@]}"
-    do
-    	if [ $(dpkg-query -W -f='${Status}' $i 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
-            echo "Installing $i"
-            sudo apt-get install $i -y
-        fi
-    done
-    
-    if [[ $(grep -c 208.67.222.222 /etc/dhcp/dhclient.conf) -eq 0 ]]; then
-      echo 'Setting up OpenDNS'
-      echo 'supersede domain-name-servers 208.67.222.222,208.67.220.220;' | \
-        sudo tee --append /etc/dhcp/dhclient.conf
-      sudo service network-manager restart
-    fi
-fi    
