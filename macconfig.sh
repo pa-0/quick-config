@@ -28,6 +28,9 @@ brew cask install cool-retro-term
 echo "Tools for markdown editing and checklists"
 brew cask install typora copyq
 
+echo "Installing office productivity..."
+brew cask install zoomus
+
 exit
 #done
 
@@ -38,8 +41,8 @@ sudo apt-get install -y fluxgui
 echo "Installing virtualization tools"
 sudo apt install -y virtualbox vagrant docker.io
 
-echo "Installing Go"
 sudo apt install -y golang-go 
+echo "Installing Go"
 sudo apt install -y gccgo-go
 
 echo "installing kubectl"
