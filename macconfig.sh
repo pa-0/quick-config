@@ -31,6 +31,9 @@ brew cask install typora copyq
 echo "Installing office productivity..."
 brew cask install zoomus
 
+echo "Logitech device support"
+brew cask install homebrew/cask-drivers/logitech-options
+
 exit
 #done
 
