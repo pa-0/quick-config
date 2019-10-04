@@ -25,6 +25,9 @@ brew cask install 1password
 
 brew cask install cool-retro-term
 
+echo "Tools for markdown editing and checklists"
+brew cask install typora copyq
+
 exit
 #done
 
