@@ -2,17 +2,23 @@
 # -devtools = setup development tools
 # -protection = opendns and guardian
 
-    #bash <(wget -qO - https://gitlab.com/DarwinJS/quick-config/raw/master/linuxmintconfig.sh) <ARGUMENTS>
-    #wget -O - https://gitlab.com/DarwinJS/quick-config/raw/master/linuxmintconfig.sh | bash -s <ARGUMENTS>
-    #bash <(curl -s https://gitlab.com/DarwinJS/quick-config/raw/master/linuxmintconfig.sh) <ARGUMENTS>
+    #bash <(wget -qO - https://gitlab.com/DarwinJS/quick-config/raw/master/macconfig.sh) <ARGUMENTS>
+    #wget -O - https://gitlab.com/DarwinJS/quick-config/raw/master/macconfig.sh | bash -s <ARGUMENTS>
+    #bash <(curl -s https://gitlab.com/DarwinJS/quick-config/raw/master/macconfig.sh) <ARGUMENTS>
 
 echo "Arguments used: $*"
 
 URL_BREW='https://raw.githubusercontent.com/Homebrew/install/master/install'
 
-echo -n '- Installing brew ... '
-echo | /usr/bin/ruby -e "$(curl -fsSL $URL_BREW)" > /dev/null
-if [ $? -eq 0 ]; then echo 'OK'; else echo 'NG'; fi
+if [[ -z $(command -v brew) ]]; then
+  echo -n '- Installing brew and git... '
+  echo | /usr/bin/ruby -e "$(curl -fsSL $URL_BREW)" > /dev/null
+  if [ $? -eq 0 ]; then echo 'OK'; else echo 'NG'; fi
+fi
+
+if [[ -z $(command -v pwsh) ]]; then
+  bash <(curl -s https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-osx.sh) -includeide
+fi
 
 Exit
 #done
