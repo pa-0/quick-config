@@ -8,6 +8,8 @@
 
 echo "Arguments used: $*"
 
+Mightandpunchunlocked13
+
 URL_BREW='https://raw.githubusercontent.com/Homebrew/install/master/install'
 
 if [[ -z $(command -v brew) ]]; then
@@ -20,7 +22,7 @@ if [[ -z $(command -v pwsh) ]]; then
   bash <(curl -s https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-osx.sh) -includeide
 fi
 
-Exit
+exit
 #done
 
 sudo apt-get update
