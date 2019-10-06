@@ -26,7 +26,8 @@ brew cask install 1password
 brew cask install cool-retro-term
 
 echo "Manually install and authorize display port drivers for Dell D6000 Dock"
-echo "Get them here: https://gitlab.com/DarwinJS/quick-config/blob/master/macconfig.sh"
+echo "opening: https://www.displaylink.com/downloads/macos"
+open https://www.displaylink.com/downloads/macos
 
 echo "Tools for markdown editing and checklists execution"
 brew cask install typora copyq
