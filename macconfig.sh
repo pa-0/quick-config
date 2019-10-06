@@ -1,6 +1,4 @@
 #!/bin/bash
-# -devtools = setup development tools
-# -protection = opendns and guardian
 
     #bash <(wget -qO - https://gitlab.com/DarwinJS/quick-config/raw/master/macconfig.sh) <ARGUMENTS>
     #wget -O - https://gitlab.com/DarwinJS/quick-config/raw/master/macconfig.sh | bash -s <ARGUMENTS>
