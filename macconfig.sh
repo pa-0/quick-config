@@ -25,7 +25,7 @@ brew cask install 1password
 
 brew cask install cool-retro-term
 
-echo "Tools for markdown editing and checklists"
+echo "Tools for markdown editing and checklists execution"
 brew cask install typora copyq
 
 echo "Installing office productivity..."
@@ -34,8 +34,12 @@ brew cask install zoomus
 echo "Logitech device support"
 brew cask install homebrew/cask-drivers/logitech-options
 
+echo "Installing Better Touch Tool for customizing window layout commands on keyboard and mouse"
+brew cask install bettertouchtool
+
 exit
 #done
+# Anything below this line is for LinuxMint and has not been converted yet.
 
 sudo add-apt-repository -y ppa:nathan-renniewaldock/flux
 sudo apt-get update
