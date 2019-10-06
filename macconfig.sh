@@ -6,6 +6,7 @@
 
 echo "Arguments used: $*"
 
+echo "Installing Homebrew and Git"
 if [[ -z $(command -v brew) ]]; then
   URL_BREW='https://raw.githubusercontent.com/Homebrew/install/master/install'
   echo -n '- Installing brew and git... '
@@ -13,6 +14,7 @@ if [[ -z $(command -v brew) ]]; then
   if [ $? -eq 0 ]; then echo 'OK'; else echo 'NG'; fi
 fi
 
+echo "Install PowerShell Core and VS Code"
 if [[ -z $(command -v pwsh) ]]; then
   bash <(curl -s https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-osx.sh) -includeide
 fi
