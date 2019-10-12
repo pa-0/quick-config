@@ -21,8 +21,6 @@ fi
 
 brew cask install opera
 
-brew cask install 1password
-
 brew cask install cool-retro-term
 
 echo "Manually install and authorize display port drivers for Dell D6000 Dock"
@@ -33,21 +31,18 @@ echo "Tools for markdown editing and checklists execution"
 brew cask install typora copyq
 
 echo "Installing office productivity..."
-brew cask install zoomus
+brew cask install 1password slack zoomus
 
 echo "Logitech device support"
 brew cask install homebrew/cask-drivers/logitech-options
 
-echo "Installing Better Touch Tool for customizing window layout commands on keyboard and mouse"
-brew cask install bettertouchtool
+echo "Installing Spectacle for customizing window layout commands on keyboard and mouse and flux for blue light"
+brew cask install spectacle flux
 
 exit
 #done
 # Anything below this line is for LinuxMint and has not been converted yet.
 
-sudo add-apt-repository -y ppa:nathan-renniewaldock/flux
-sudo apt-get update
-sudo apt-get install -y fluxgui
 
 echo "Installing virtualization tools"
 sudo apt install -y virtualbox vagrant docker.io
