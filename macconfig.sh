@@ -31,7 +31,7 @@ echo "Tools for markdown editing and checklists execution"
 brew cask install typora copyq
 
 echo "Installing office productivity..."
-brew cask install 1password slack zoomus
+brew cask install 1password slack zoomus toggl drawio
 
 echo "Logitech device support"
 brew cask install homebrew/cask-drivers/logitech-options
