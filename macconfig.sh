@@ -39,6 +39,8 @@ brew cask install homebrew/cask-drivers/logitech-options
 
 brew install ticktick kindle
 
+brew install visual-studio-code
+
 exit
 #done
 # Anything below this line is for LinuxMint and has not been converted yet.
