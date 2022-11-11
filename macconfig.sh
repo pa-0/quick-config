@@ -44,27 +44,11 @@ exit
 # Anything below this line is for LinuxMint and has not been converted yet.
 
 
-echo "Installing virtualization tools"
-sudo apt install -y virtualbox vagrant docker.io
-
-sudo apt install -y golang-go 
-echo "Installing Go"
-sudo apt install -y gccgo-go
-
-echo "installing kubectl"
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-sudo apt-get update
-sudo apt-get install -y kubectl
-
-echo "Installing Kind (for Kube in Docker), Docs: https://github.com/kubernetes-sigs/kind"
-#go get -u sigs.k8s.io/kind
-curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.5.1/kind-$(uname)-amd64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/kind
-
-
-echo "commands to setup a cluster (from https://itnext.io/starting-local-kubernetes-using-kind-and-docker-c6089acfc1c0)"
-
-echo "sudo kind create cluster"
-echo "sudo kind list cluster"
+echo "Install:
+echo "  - context"
+echo "  - rectangle"
+echo "  - rancher Desktop from https://github.com/rancher-sandbox/rancher-desktop/releases"
+echo "  - MS Office from person login"
+echo "  - ticktick"
+echo "  - discord client?"
+echo "  - zoom"
