@@ -19,9 +19,7 @@ if [[ -z $(command -v pwsh) ]]; then
   bash <(curl -s https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-osx.sh) -includeide
 fi
 
-brew cask install opera
-
-brew cask install cool-retro-term
+brew cask install tabby
 
 echo "Manually install and authorize display port drivers for Dell D6000 Dock"
 echo "opening: https://www.displaylink.com/downloads/macos"
@@ -31,13 +29,13 @@ echo "Tools for markdown editing and checklists execution"
 brew cask install typora copyq
 
 echo "Installing office productivity..."
-brew cask install 1password slack zoomus toggl drawio
+brew cask install 1password slack zoomus
 
 echo "Logitech device support"
 brew cask install homebrew/cask-drivers/logitech-options
 
 echo "Installing Spectacle for customizing window layout commands on keyboard and mouse and flux for blue light"
-brew cask install spectacle flux
+brew cask install rectangle contexts
 
 exit
 #done
