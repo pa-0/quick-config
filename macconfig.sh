@@ -8,10 +8,8 @@ echo "Arguments used: $*"
 
 echo "Installing Homebrew and Git"
 if [[ -z $(command -v brew) ]]; then
-  URL_BREW='https://raw.githubusercontent.com/Homebrew/install/master/install'
-  echo -n '- Installing brew and git... '
-  echo | /usr/bin/ruby -e "$(curl -fsSL $URL_BREW)" > /dev/null
-  if [ $? -eq 0 ]; then echo 'OK'; else echo 'NG'; fi
+  export HOMEBREW_INSTALL_FROM_API=1
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 echo "Install PowerShell Core and VS Code"
@@ -19,23 +17,27 @@ if [[ -z $(command -v pwsh) ]]; then
   bash <(curl -s https://raw.githubusercontent.com/PowerShell/PowerShell/master/tools/installpsh-osx.sh) -includeide
 fi
 
-brew cask install tabby
+brew install chrome vivaldi
+
+brew install tabby
 
 echo "Manually install and authorize display port drivers for Dell D6000 Dock"
 echo "opening: https://www.displaylink.com/downloads/macos"
 open https://www.displaylink.com/downloads/macos
 
 echo "Tools for markdown editing and checklists execution"
-brew cask install typora copyq
+brew cask install typora
 
 echo "Installing office productivity..."
 brew cask install 1password slack zoomus
 
+echo "Installing Spectacle for customizing window layout commands on keyboard and mouse and flux for blue light"
+brew cask install rectangle contexts
+
 echo "Logitech device support"
 brew cask install homebrew/cask-drivers/logitech-options
 
-echo "Installing Spectacle for customizing window layout commands on keyboard and mouse and flux for blue light"
-brew cask install rectangle contexts
+brew install ticktick kindle
 
 exit
 #done
@@ -43,10 +45,7 @@ exit
 
 
 echo "Install:
-echo "  - context"
-echo "  - rectangle"
 echo "  - rancher Desktop from https://github.com/rancher-sandbox/rancher-desktop/releases"
+open https://github.com/rancher-sandbox/rancher-desktop/releases
 echo "  - MS Office from person login"
-echo "  - ticktick"
 echo "  - discord client?"
-echo "  - zoom"
