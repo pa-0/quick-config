@@ -8,7 +8,7 @@ $choicedesc.Add((New-Object "System.Management.Automation.Host.ChoiceDescription
 $Host.ui.PromptForChoice($caption, $message, $choicedesc, $default) 
 }
 
-Write-output "`r`n`r`nQuick Config by Darwin (CSI-Windows.com)...`r`n`r`n"
+Write-output "`r`n`r`nQuick Config by Darwin ...`r`n`r`n"
 Write-output "Gets Your Machine Ready to Author Chocolatey Packages"
 
 "Getting Started..." | out-default
@@ -20,14 +20,13 @@ $os = (Get-WmiObject "Win32_OperatingSystem")
 If (!(Test-Path env:ChocolateyInstall))
   {
   "Installing Chocolatey Package Manager..." | out-default
-  iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1')) 
+  Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
   $env:path = "$($env:ALLUSERSPROFILE)\chocolatey\bin;$($env:Path)"
   }
 
 Write-Output "Installing Packages"
-cinst -y atom
-cinst -y git
-$gitpath = 'C:\Program Files (x86)\git\cmd'
+choco install -y git vscode
+$gitpath = 'C:\Program Files\git\cmd'
 $CurrentMachinePath = [Environment]::GetEnvironmentVariable("Path", "Machine")
 $CurrentProcessPath = [Environment]::GetEnvironmentVariable("Path", "Process")
 if (!($CurrentMachinePath -ilike "*\git\cmd*"))
@@ -41,5 +40,13 @@ if (!($CurrentProcessPath -ilike "*\git\cmd*"))
   }
 git config --global credential.helper wincred
 
-choco install nuget.commandline
-$env:path = $env:path + ";C:\Program Files (x86)\git\cmd"
+#choco install nuget.commandline
+#$env:path = $env:path + ";C:\Program Files (x86)\git\cmd"
+
+Write-Output "Don't forget the following:"
+Write-Output " - change password"
+Write-Output " - Chocolatey API key"
+Write-Output " - Clone chocolatey package repo"
+Write-Output " - install SSH"
+Write-Output " - ssh key gen"
+Write-Output " - add ssh key in GitLab"
