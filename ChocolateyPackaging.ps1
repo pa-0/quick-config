@@ -61,12 +61,8 @@ If (!(Test-Path 'C:\Program Files\git\usr\bin\ssh-keygen.exe'))
 choco install -y vscode
 
 #choco install nuget.commandline
-#$env:path = $env:path + ";C:\Program Files (x86)\git\cmd"
 
 Write-Output "Don't forget the following:"
-Write-Output " - change password"
+Write-Output " - change password" # $pp = 'apasswordhere'; set-localuser -name administrator -password (convertto-securestring -string $pp -asplaintext -force)
 Write-Output " - Chocolatey API key"
 Write-Output " - Clone chocolatey package repo"
-Write-Output " - install SSH"
-Write-Output " - ssh key gen"
-Write-Output " - add ssh key in GitLab"
