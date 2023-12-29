@@ -4,8 +4,12 @@
 
 # Launch AMI
 # - instance type T3.xlarge
+# - EBS = encrypted
 # - Stop-hibernation = enable
-# - termination protection = enable
+# - spot instance = yes
+#   - customize spot instance options, 
+#      - request type = persistent
+#      - interruption behavior = hibernate
 
 Function Console-Prompt {
   Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
@@ -69,7 +73,7 @@ choco install -y vscode
 
 Write-Output "Don't forget the following:"
 Write-Output " - change password" # $pp = 'apasswordhere'; set-localuser -name administrator -password (convertto-securestring -string $pp -asplaintext -force)
-Write-Output " - Chocolatey API key"
+Write-Output " - Chocolatey API key" #including `choco config set --name="'defaultPushSource'" --value="'https://push.chocolatey.org/'"
 Write-Output " - Clone chocolatey package repo"
 Write-Output " - set timezone"
 
