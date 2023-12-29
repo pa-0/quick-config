@@ -2,6 +2,11 @@
 
 # Invoke-Expression -command "Invoke-WebRequest -uri 'https://gitlab.com/DarwinJS/quick-config/-/raw/master/ChocolateyPackaging.ps1?ref_type=heads' -UseBasicParsing -OutFile ./ChocolateyPackaging.ps1" ; . ./ChocolateyPackaging.ps1
 
+# Launch AMI
+# - instance type T3.xlarge
+# - Stop-hibernation = enable
+# - termination protection = enable
+
 Function Console-Prompt {
   Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
 $choicedesc = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription] 
@@ -66,3 +71,7 @@ Write-Output "Don't forget the following:"
 Write-Output " - change password" # $pp = 'apasswordhere'; set-localuser -name administrator -password (convertto-securestring -string $pp -asplaintext -force)
 Write-Output " - Chocolatey API key"
 Write-Output " - Clone chocolatey package repo"
+Write-Output " - set timezone"
+
+Write-Output " - schedule nightly shutdown at 1am with "c:\windows\system32\shutdown.exe /s /f
+Write-Output " - in AWS enable termination protection"
