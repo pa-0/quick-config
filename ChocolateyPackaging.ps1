@@ -82,7 +82,7 @@ Write-Output " - set timezone"
 Write-Output " - schedule nightly shutdown at 1am with "c:\windows\system32\shutdown.exe /s /f
 Write-Output " - in AWS enable termination protection"
 
- c:\windows\system32\schtasks.exe /CREATE /SC DAILY /MO 1 /TN 'ForceHibernate' /TR 'c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0' /ST 01:00 /F
+c:\windows\system32\schtasks.exe /CREATE /SC DAILY /MO 1 /TN 'ForceHibernate' /TR 'c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0' /ST 01:00 /F
 
 #requires -RunAsAdministrator
 
@@ -95,8 +95,12 @@ $taskName = 'HibernateWhenIdleTooLong'
 # Note: Passing -Force to Stop-Computer is the only way to *guarantee* that the
 #       computer will shut down, but can result in data loss if the user has unsaved data.
 $action = New-ScheduledTaskAction -Execute powershell.exe -Argument @"
-  -NoProfile -Command "Start-Sleep $((New-TimeSpan -Minutes $idleTimeoutMins).TotalSeconds);c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
+  -NoProfile -Command "c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
 "@
+$action = New-ScheduledTaskAction -Execute c:\windows\system32\rundll32.exe -Argument @"
+  powrprof.dll,SetSuspendState 0,1,0"
+"@
+
 
 # Specify the user identy for the scheduled task:
 # Use NT AUTHORIT\SYSTEM, so that the tasks runs invisibly and
