@@ -82,18 +82,20 @@ Write-Output " - set timezone"
 Write-Output " - schedule nightly shutdown at 1am with "c:\windows\system32\shutdown.exe /s /f
 Write-Output " - in AWS enable termination protection"
 
- #requires -RunAsAdministrator
+ c:\windows\system32\schtasks.exe /CREATE /SC DAILY /MO 1 /TN 'ForceHibernate' /TR 'c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0' /ST 01:00 /F
+
+#requires -RunAsAdministrator
 
 # Specify the number of hours of idle time after which the shutdown should occur.
 $idleTimeoutMins = 15
 # Specify the task name.
-$taskName = 'ForceHibernate'
+$taskName = 'HibernateWhenIdleTooLong'
 
 # Create the shutdown action.
 # Note: Passing -Force to Stop-Computer is the only way to *guarantee* that the
 #       computer will shut down, but can result in data loss if the user has unsaved data.
 $action = New-ScheduledTaskAction -Execute powershell.exe -Argument @"
-  -NoProfile -Command "c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
+  -NoProfile -Command "Start-Sleep $((New-TimeSpan -Minutes $idleTimeoutMins).TotalSeconds);c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
 "@
 
 # Specify the user identy for the scheduled task:
@@ -105,6 +107,12 @@ $principal = New-ScheduledTaskPrincipal -UserID 'NT AUTHORITY\SYSTEM' -LogonType
 # Note: This alone is NOT enough - an on-idle *trigger* must be created too.
 $settings = New-ScheduledTaskSettingsSet -RunOnlyIfIdle
 
+# New-ScheduledTaskTrigger does NOT support creating on-idle triggers, but you 
+# can use the relevant CIM class directly, courtesy of this excellent blog post:
+# https://www.ctrl.blog/entry/idle-task-scheduler-powershell.html
+$trigger = Get-CimClass -ClassName MSFT_TaskIdleTrigger -Namespace Root/Microsoft/Windows/TaskScheduler  
+
 # Finally, create and register the task:
 Register-ScheduledTask $taskName -Action $action -Principal $principal -Settings $settings -Trigger $trigger -Force 
+
 
