@@ -81,3 +81,30 @@ Write-Output " - set timezone"
 
 Write-Output " - schedule nightly shutdown at 1am with "c:\windows\system32\shutdown.exe /s /f
 Write-Output " - in AWS enable termination protection"
+
+ #requires -RunAsAdministrator
+
+# Specify the number of hours of idle time after which the shutdown should occur.
+$idleTimeoutMins = 15
+# Specify the task name.
+$taskName = 'ForceHibernate'
+
+# Create the shutdown action.
+# Note: Passing -Force to Stop-Computer is the only way to *guarantee* that the
+#       computer will shut down, but can result in data loss if the user has unsaved data.
+$action = New-ScheduledTaskAction -Execute powershell.exe -Argument @"
+  -NoProfile -Command "c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0"
+"@
+
+# Specify the user identy for the scheduled task:
+# Use NT AUTHORIT\SYSTEM, so that the tasks runs invisibly and
+# whether or not users are logged on.
+$principal = New-ScheduledTaskPrincipal -UserID 'NT AUTHORITY\SYSTEM' -LogonType ServiceAccount
+
+# Create a settings set that activates the condition to run only when idle.
+# Note: This alone is NOT enough - an on-idle *trigger* must be created too.
+$settings = New-ScheduledTaskSettingsSet -RunOnlyIfIdle
+
+# Finally, create and register the task:
+Register-ScheduledTask $taskName -Action $action -Principal $principal -Settings $settings -Trigger $trigger -Force 
+
