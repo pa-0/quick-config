@@ -4,12 +4,14 @@
 
 # Launch AMI
 # - instance type T3.xlarge
+# - EBS Size = 46GB for 16 GB RAM instance, 38 GB for 8 GB RAM instance (add room for hibernation file)
 # - EBS = encrypted
 # - Stop-hibernation = enable
 # - spot instance = yes
 #   - customize spot instance options, 
 #      - request type = persistent
 #      - interruption behavior = hibernate
+# Userdata "c:\windows\system32\schtasks.exe /CREATE /SC DAILY /MO 1 /TN 'ForceHibernateAt1AM' /TR 'c:\windows\system32\rundll32.exe powrprof.dll,SetSuspendState 0,1,0' /ST 01:00 /F"
 
 Function Console-Prompt {
   Param( [String[]]$choiceList,[String]$Caption = "Please make a selection",[String]$Message = "Choices are presented below",[int]$default = 0 )
