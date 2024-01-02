@@ -86,6 +86,9 @@ c:\windows\system32\schtasks.exe /CREATE /SC DAILY /MO 1 /TN 'ForceHibernate' /T
 
 #requires -RunAsAdministrator
 
+# 1. Idle state is only verified every 15 minutes: https://learn.microsoft.com/en-us/windows/win32/taskschd/task-idle-conditions#detecting-the-idle-statevv
+# 2. By default "OnIdle" tasks are configured to wait for 10 more minutes of idle time. Meaning this setup will default to between 10 and 25 minutes of idle time to hibernate.
+
 # Specify the number of hours of idle time after which the shutdown should occur.
 $idleTimeoutMins = 15
 # Specify the task name.
@@ -100,7 +103,6 @@ $action = New-ScheduledTaskAction -Execute powershell.exe -Argument @"
 $action = New-ScheduledTaskAction -Execute c:\windows\system32\rundll32.exe -Argument @"
   powrprof.dll,SetSuspendState 0,1,0"
 "@
-
 
 # Specify the user identy for the scheduled task:
 # Use NT AUTHORIT\SYSTEM, so that the tasks runs invisibly and
